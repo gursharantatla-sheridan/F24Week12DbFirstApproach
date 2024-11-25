@@ -31,8 +31,12 @@ namespace F24Week12DbFirstApproach
 
         private void LoadStudents()
         {
-            var students = db.Students.ToList();
-            grdStudents.ItemsSource = students;
+            //var students = db.Students.ToList();
+
+            var students = from s in db.Students
+                           select new { s.StudentID, s.StudentName, s.Standard.StandardName };
+
+            grdStudents.ItemsSource = students.ToList();
         }
 
         private void LoadStandardsInCombobox()
